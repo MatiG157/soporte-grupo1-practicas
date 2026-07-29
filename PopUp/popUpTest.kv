@@ -1,0 +1,51 @@
+#:import Factory kivy.factory.Factory
+
+<ConfirmPopup@Popup>:
+    title: "Confirmar Acción"
+    size_hint: (0.8, 0.35)
+
+    auto_dismiss: False
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(10)
+        Label:
+            text: "¿Estás seguro de que deseas cerrar sesión?"
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: dp(10)
+            size_hint: (1, 0.5)
+            Button:
+                text: "Sí, cerrar"
+                background_color: 0.8, 0.2, 0.2, 1
+                on_press: 
+                    root.dismiss()
+                    app.root.ids.lbl_estado.text = "Has cerrado sesión correctamente."
+                    app.root.ids.lbl_estado.color = 0.5, 0.5, 0.5, 1
+                    
+                    
+            Button:
+                text: "Cancelar"
+                on_press: root.dismiss()
+
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: dp(20)
+    spacing: dp(20)
+
+    Label:
+        # Los ID definidos en la raíz se guardan automáticamente en 'app.root.ids'
+        id: lbl_estado
+        text: "¡Bienvenido, Usuario!"
+        font_size: '24sp'
+        size_hint: 1, 0.8
+
+    Button:
+        text: "Cerrar Sesión"
+        size_hint: 1, 0.2
+        background_color: 0.8, 0.2, 0.2, 1
+        # Usamos Factory directamente en el KV para instanciar y abrir el Popup
+        on_press: Factory.ConfirmPopup().open()
