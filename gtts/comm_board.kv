@@ -1,0 +1,61 @@
+#:kivy 2.0
+
+<CategoryButton@ToggleButton>:
+    group: 'categorias'
+    size_hint_y: None
+    height: '48dp'
+    font_size: '16sp'
+
+<PhraseButton@Button>:
+    font_size: '20sp'
+    text_size: self.width - 20, None
+    halign: 'center'
+    valign: 'middle'
+
+<CommBoard>:
+    orientation: 'vertical'
+    padding: '10dp'
+    spacing: '10dp'
+
+    Label:
+        text: 'Panel de Comunicación'
+        font_size: '24sp'
+        size_hint_y: None
+        height: '40dp'
+        bold: True
+
+    BoxLayout:
+        id: category_row
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '48dp'
+        spacing: '5dp'
+
+    ScrollView:
+        GridLayout:
+            id: buttons_grid
+            cols: 3
+            spacing: '10dp'
+            padding: '5dp'
+            size_hint_y: None
+            row_default_height: '90dp'
+            row_force_default: True
+            height: self.minimum_height
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '50dp'
+        spacing: '10dp'
+
+        TextInput:
+            id: custom_text
+            hint_text: 'Escribí una frase para decir en voz alta...'
+            multiline: False
+            font_size: '18sp'
+
+        Button:
+            text: 'Hablar'
+            size_hint_x: None
+            width: '100dp'
+            on_press: root.say_custom()
